@@ -33,7 +33,7 @@ export default function Dashboard() {
   const [searchInput, setSearchInput] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedKeyword, setSelectedKeyword] = useState<KeywordData | null>(null);
-  const [selectedForecastMonth, setSelectedForecastMonth] = useState<string>('Mar');
+  const [selectedForecastMonth, setSelectedForecastMonth] = useState<string>('May');
   const [forecastCount, setForecastCount] = useState<number>(20);
   const [sortMonth, setSortMonth] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -172,7 +172,7 @@ export default function Dashboard() {
             <div className="bg-indigo-600 p-2 rounded-lg">
               <MapPin className="w-5 h-5 text-white" />
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-zinc-900">Từ khoá SEO | Dashboard</h1>
+            <h1 className="text-xl font-bold tracking-tight text-zinc-900">Keywords | Du lịch | VnE</h1>
           </div>
             <div className="relative w-full max-w-md">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -505,7 +505,7 @@ export default function Dashboard() {
       <footer className="bg-white border-t border-zinc-200 py-12 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="pt-8 border-t border-zinc-100 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-zinc-400">© 2026 Từ khoá SEO | Dashboard. All rights reserved.</p>
+            <p className="text-xs text-zinc-400">© 2026 Keywords | Du lịch | VnE. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <span className="text-xs text-zinc-400">Powered by Google AI Studio</span>
             </div>

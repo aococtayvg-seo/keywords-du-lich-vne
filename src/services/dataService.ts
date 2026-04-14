@@ -11,7 +11,7 @@ export interface KeywordData {
   upcomingGrowth: number; // Calculated growth for the coming months
 }
 
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/1XEuoeyhxAJlDHZb-kvC6CGhdMBPKEVoe-2-wmbq3ydg/gviz/tq?tqx=out:csv&sheet=03-2026';
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/1XEuoeyhxAJlDHZb-kvC6CGhdMBPKEVoe-2-wmbq3ydg/gviz/tq?tqx=out:csv';
 
 export const fetchKeywordData = async (): Promise<KeywordData[]> => {
   return new Promise((resolve, reject) => {
