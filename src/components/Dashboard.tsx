@@ -239,11 +239,18 @@ export default function Dashboard() {
               </div>
               <div className="divide-y divide-zinc-100 overflow-y-auto max-h-[400px]">
                 {topTrending.map((item, idx) => (
-                  <button
+                  <div
                     key={item.keyword}
                     onClick={() => setSelectedKeyword(item as KeywordData)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        setSelectedKeyword(item as KeywordData);
+                      }
+                    }}
                     className={cn(
-                      "w-full text-left px-5 py-3 hover:bg-zinc-50 transition-colors flex items-center justify-between group",
+                      "w-full text-left px-5 py-3 hover:bg-zinc-50 transition-colors flex items-center justify-between group cursor-pointer",
                       selectedKeyword?.keyword === item.keyword && "bg-indigo-50/50"
                     )}
                   >
@@ -276,7 +283,7 @@ export default function Dashboard() {
                         Gợi ý SEO
                       </button>
                     </div>
-                  </button>
+                  </div>
                 ))}
               </div>
             </section>

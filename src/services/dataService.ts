@@ -69,8 +69,38 @@ export const fetchKeywordData = async (): Promise<KeywordData[]> => {
             };
           });
           
-          // Filter out rows without a keyword
-          resolve(parsedData.filter(d => d.keyword));
+          const finalData = parsedData.filter(d => d.keyword);
+          
+          // Supplement data for 'lagi' as requested
+          const lagiEntry = finalData.find(d => d.keyword.toLowerCase() === 'lagi');
+          if (lagiEntry) {
+            // Update or add Feb 2026
+            const febData = lagiEntry.monthlyData.find(m => m.month === 'Feb 2026');
+            if (febData) febData.volume = 40500;
+            else lagiEntry.monthlyData.push({ month: 'Feb 2026', volume: 40500 });
+
+            // Update or add Mar 2026
+            const marData = lagiEntry.monthlyData.find(m => m.month === 'Mar 2026');
+            if (marData) marData.volume = 33100;
+            else lagiEntry.monthlyData.push({ month: 'Mar 2026', volume: 33100 });
+          } else {
+            // If 'lagi' is not in the sheet, add it manually
+            finalData.push({
+              keyword: 'lagi',
+              avgSearchVolume: 36800,
+              trend: 0,
+              cpcLow: 0,
+              cpcHigh: 0,
+              competition: 0,
+              monthlyData: [
+                { month: 'Feb 2026', volume: 40500 },
+                { month: 'Mar 2026', volume: 33100 }
+              ],
+              upcomingGrowth: 0
+            });
+          }
+          
+          resolve(finalData);
         } catch (err) {
           reject(err);
         }
