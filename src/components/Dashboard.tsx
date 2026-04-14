@@ -241,30 +241,25 @@ export default function Dashboard() {
                 {topTrending.map((item, idx) => (
                   <div
                     key={item.keyword}
-                    onClick={() => setSelectedKeyword(item as KeywordData)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        setSelectedKeyword(item as KeywordData);
-                      }
-                    }}
                     className={cn(
-                      "w-full text-left px-5 py-3 hover:bg-zinc-50 transition-colors flex items-center justify-between group cursor-pointer",
-                      selectedKeyword?.keyword === item.keyword && "bg-indigo-50/50"
+                      "w-full flex items-center justify-between group transition-colors",
+                      selectedKeyword?.keyword === item.keyword ? "bg-indigo-50/50" : "hover:bg-zinc-50"
                     )}
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="text-zinc-400 font-mono text-sm w-4">{idx + 1}</span>
-                      <div className="flex flex-col">
-                        <span className="font-medium text-zinc-900 capitalize">{item.keyword}</span>
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className="text-[10px] uppercase tracking-wider text-zinc-400 font-bold">Vol TB:</span>
-                          <span className="text-xs font-bold text-indigo-600">{item.avgSearchVolume.toLocaleString()}</span>
+                    <button
+                      onClick={() => setSelectedKeyword(item as KeywordData)}
+                      className="flex-1 text-left px-5 py-3 flex items-center justify-between"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-zinc-400 font-mono text-sm w-4">{idx + 1}</span>
+                        <div className="flex flex-col">
+                          <span className="font-medium text-zinc-900 capitalize">{item.keyword}</span>
+                          <div className="flex items-center gap-1.5 mt-0.5">
+                            <span className="text-[10px] uppercase tracking-wider text-zinc-400 font-bold">Vol TB:</span>
+                            <span className="text-xs font-bold text-indigo-600">{item.avgSearchVolume.toLocaleString()}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="flex flex-col items-end gap-1">
                       <div className={cn(
                         "flex items-center gap-1 px-2 py-1 rounded-md",
                         item.forecastGrowth >= 0 ? "text-emerald-600 bg-emerald-50" : "text-rose-600 bg-rose-50"
@@ -272,11 +267,10 @@ export default function Dashboard() {
                         {item.forecastGrowth >= 0 ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                         <span className="text-xs font-bold">{Math.abs(item.forecastGrowth).toFixed(1)}%</span>
                       </div>
+                    </button>
+                    <div className="pr-5 py-3">
                       <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          fetchSeoSuggestion(item.keyword);
-                        }}
+                        onClick={() => fetchSeoSuggestion(item.keyword)}
                         className="text-[10px] font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1 bg-indigo-50 px-1.5 py-0.5 rounded transition-colors"
                       >
                         <Sparkles className="w-2.5 h-2.5" />
@@ -445,7 +439,7 @@ export default function Dashboard() {
                     )}
                   >
                     {/* Dòng 1: Tên từ khoá show full */}
-                    <button
+                    <div
                       onClick={() => {
                         setModalKeyword(item);
                         setIsModalOpen(true);
@@ -455,7 +449,7 @@ export default function Dashboard() {
                       <h3 className="font-bold capitalize text-sm text-zinc-900 leading-snug">
                         {item.keyword}
                       </h3>
-                    </button>
+                    </div>
 
                     {/* Dòng 2: Chia làm 3 phần bằng nhau */}
                     <div className="grid grid-cols-3 items-center gap-2 pt-3 border-t border-zinc-100">
@@ -468,7 +462,7 @@ export default function Dashboard() {
                       </div>
 
                       {/* Phần 2: Chart */}
-                      <button
+                      <div
                         onClick={() => {
                           setModalKeyword(item);
                           setIsModalOpen(true);
@@ -487,7 +481,7 @@ export default function Dashboard() {
                             />
                           </AreaChart>
                         </ResponsiveContainer>
-                      </button>
+                      </div>
 
                       {/* Phần 3: Gợi ý SEO */}
                       <div className="flex justify-end">
